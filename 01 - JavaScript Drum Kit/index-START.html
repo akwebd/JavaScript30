@@ -3,49 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <title>JS Drum Kit</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
-
-
-  <div class="keys">
-    <div data-key="65" class="key">
-      <kbd>A</kbd>
-      <span class="sound">clap</span>
-    </div>
-    <div data-key="83" class="key">
-      <kbd>S</kbd>
-      <span class="sound">hihat</span>
-    </div>
-    <div data-key="68" class="key">
-      <kbd>D</kbd>
-      <span class="sound">kick</span>
-    </div>
-    <div data-key="70" class="key">
-      <kbd>F</kbd>
-      <span class="sound">openhat</span>
-    </div>
-    <div data-key="71" class="key">
-      <kbd>G</kbd>
-      <span class="sound">boom</span>
-    </div>
-    <div data-key="72" class="key">
-      <kbd>H</kbd>
-      <span class="sound">ride</span>
-    </div>
-    <div data-key="74" class="key">
-      <kbd>J</kbd>
-      <span class="sound">snare</span>
-    </div>
-    <div data-key="75" class="key">
-      <kbd>K</kbd>
-      <span class="sound">tom</span>
-    </div>
-    <div data-key="76" class="key">
-      <kbd>L</kbd>
-      <span class="sound">tink</span>
-    </div>
-  </div>
+<!--    Modified to use unordered list instead of nested divs-->
+    <ul class="keys">
+        <li data-key="65" class="key">
+            <kbd>A</kbd>
+            <span class="sound">clap</span>
+        </li>        
+        <li data-key="83" class="key">
+            <kbd>S</kbd>
+            <span class="sound">hihat</span>
+        </li>        
+        <li data-key="68" class="key">
+            <kbd>D</kbd>
+            <span class="sound">kick</span>
+        </li>        
+        <li data-key="70" class="key">
+            <kbd>F</kbd>
+            <span class="sound">openhat</span>
+        </li>        
+        <li data-key="71" class="key">
+            <kbd>G</kbd>
+            <span class="sound">boom</span>
+        </li>        
+        <li data-key="72" class="key">
+            <kbd>H</kbd>
+            <span class="sound">ride</span>
+        </li>        
+        <li data-key="74" class="key">
+            <kbd>J</kbd>
+            <span class="sound">snare</span>
+        </li>      
+        <li data-key="75" class="key">
+            <kbd>K</kbd>
+            <span class="sound">tom</span>
+        </li>        
+        <li data-key="76" class="key">
+            <kbd>L</kbd>
+            <span class="sound">tink</span>
+        </li>
+    </ul>
 
   <audio data-key="65" src="sounds/clap.wav"></audio>
   <audio data-key="83" src="sounds/hihat.wav"></audio>
@@ -57,9 +56,7 @@
   <audio data-key="75" src="sounds/tom.wav"></audio>
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
-<script>
-
-</script>
+<script type="text/jscript" src="JS/code.js"></script>
 
 
 </body>

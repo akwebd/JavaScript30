@@ -9,6 +9,10 @@ body,html {
   font-family: sans-serif;
 }
 
+.keys{
+    list-style: none;
+}
+
 .keys {
   display: flex;
   flex: 1;
