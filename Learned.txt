@@ -1,0 +1,5 @@
+1. document.querySelector(All) can be used to select all kinds of elements (with or without attributes defined in square brackets):
+  a. standard HTML tags;
+  b. classes;
+  c. IDs;
+  d. etc.
