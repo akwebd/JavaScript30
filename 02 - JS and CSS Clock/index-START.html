@@ -61,13 +61,30 @@
       background:black;
       position: absolute;
       top:50%;
+      transform-origin: 100% 50%;
     }
 
   </style>
-
-  <script>
-
-
+  <script>      
+      //query all clock hands
+      var hands = {};
+      hands['hour'] = document.querySelector('.hour-hand');
+      hands['min'] = document.querySelector('.min-hand');
+      hands['sec'] = document.querySelector('.second-hand');
+      function getDeg(num, base, offs){
+          return (num * 360/base + offs) % 360;
+      }
+      function update(hands){
+          var time = new Date();
+          var hourAngle = getDeg(time.getHours() + time.getMinutes()/60, 12, 90);
+          hands.hour.style.transform = 'rotate(' + hourAngle +'deg)';
+          var minAngle = getDeg(time.getMinutes() + time.getSeconds()/60, 60, 90);
+          hands.min.style.transform = 'rotate(' + minAngle +'deg)';
+          var secAngle = getDeg(time.getSeconds(), 60, 90);
+          hands.sec.style.transform = 'rotate(' + secAngle +'deg)';
+      }
+      
+      var t = setInterval(function(){update(hands)}, 1000);
   </script>
 </body>
 </html>
