@@ -3,3 +3,18 @@
   b. classes;
   c. IDs;
   d. etc.
+  
+2. CSS3 has built-in variable support. Variables are defined on an element thats' subelement shall use it, if it is for whole document it should be defined for ':root' element. If same variable is defined at two different levels, more inner wins out.
+	Example:
+		Definition: 
+					:root{
+							  --spacing: 10px;
+							  --blur: 10px;
+							  --base: #ffc600;
+						  }
+		Usage: 
+				  img{
+					  background: var(--base);
+					  padding: var(--spacing);
+					  filter: blur(var(--blur));                  
+				  }
