@@ -15,8 +15,58 @@
     </ul>
   </form>
 <script>
+    //to add new DOM li elements
+    function addHint(parent, text){
+        const element = document.createElement('li');
+        element.innerHTML = text;
+        parent.appendChild(element);
+    }
+    //to remove child nodes
+    function clearNode(parent){
+        while (parent.firstChild)
+            parent.removeChild(parent.firstChild);
+    }
+    //populate hints
+    function showHints(e){        
+        const suggestionNode = document.querySelector('.suggestions');
+        if (e.target.value.length > 0){
+            const hint = new RegExp(`(${e.target.value})`, 'gi');//search group can help to preserve original formatting
+            const suggestions = cities.filter(city => `${city.city}${city.state}`.match(hint));
+            if (suggestions.length > 0)
+            {
+                clearNode(suggestionNode);
+                suggestions.forEach(suggestion => {
+                    const town = `${suggestion.city}, ${suggestion.state}`.replace(hint, '<span class = "hl">$1</span>');
+                    const population = suggestion.population.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                    const html = `<span class="Name">${town}</span> <span class = "population">${population}</span>`;
+                    addHint(suggestionNode, html);
+                });
+            }
+            else
+            {
+                clearNode(suggestionNode);
+            }
+        }
+        else
+        {
+            clearNode(suggestionNode);
+            addHint(suggestionNode, "Filter for a city");
+            addHint(suggestionNode, "or a state");
+        }
+    }
+    
+    
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+    
+    
+    const cities = [];
+    fetch(endpoint)
+    .then(blob => blob.json())
+          .then(data => cities.push(...data));
 
+    const inputNode = document.querySelector('.search');
+    inputNode.addEventListener('input', showHints);
+    
 </script>
   </body>
 </html>
