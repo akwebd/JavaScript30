@@ -104,6 +104,24 @@
   </div>
 
 <script>
+    
+    const checkboxes = Array.from(document.querySelectorAll('input[type=checkbox]'));
+    let lastCheckbox = null;
+    
+    document.addEventListener('mousedown', (e) => {
+        const checkbox = e.target;
+        if(checkboxes.includes(checkbox) && !checkbox.checked){
+            if(lastCheckbox != null && e.shiftKey){
+                const toCheck = checkboxes.slice(
+                    Math.min(checkboxes.indexOf(lastCheckbox), checkboxes.indexOf(checkbox) + 1),//offset was added to avoid check removal
+                    Math.max(checkboxes.indexOf(lastCheckbox), checkboxes.indexOf(checkbox)));
+                toCheck.forEach(box => {
+                    if(!box.checked) box.checked = true;   
+                });
+            }
+            lastCheckbox = checkbox;
+        }
+    });
 </script>
 </body>
 </html>
