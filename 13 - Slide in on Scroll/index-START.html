@@ -58,6 +58,24 @@
       };
     }
 
+      //get all image elements
+      const images = document.querySelectorAll('.slide-in');
+      
+      //function to check if image is in view
+      function inView(){
+          images.forEach(image => {   
+              const viewAt = window.scrollY + window.innerHeight - image.height / 2;
+              const imageBottom = image.offsetTop + image.height;
+              const isHalfShown = viewAt > image.offsetTop;
+              const isNotScrolledPast = window.scrollY < imageBottom;
+              console.log(image.offsetTop > viewAt);
+              if(isHalfShown && isNotScrolledPast)
+                  image.classList.add('active');
+              else
+                  image.classList.remove('active'); 
+          }); 
+      }
+      window.addEventListener('scroll', debounce(inView));
   </script>
 
   <style>
