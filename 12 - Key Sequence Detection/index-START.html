@@ -7,6 +7,17 @@
 </head>
 <body>
 <script>
+    const keysPressed = [];
+    const keyWord = 'akwebd';
+    const phrase = new RegExp(`(${keyWord})`, '\gi');
+    window.addEventListener('keyup', (e) =>{
+        console.log(e.key);
+        keysPressed.push(e.key);
+        keysPressed.splice(0, keysPressed.length-keyWord.length);
+        if(keysPressed.join('').match(phrase))
+            console.log('BINGO!!!');
+        console.log(keysPressed);
+    });
 </script>
 </body>
 </html>
