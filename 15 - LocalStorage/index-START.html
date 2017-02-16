@@ -28,7 +28,44 @@
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
-  const items = [];
+  const items = JSON.parse(localStorage.getItem('items'))||[];
+    
+    //FUNCTIONS
+    //Add new meals
+    function addItem(e){
+        e.preventDefault();
+        const inputText = this.querySelector('[name=item]').value;
+        const item = {
+            name: inputText,
+            done: false};//true when done
+        items.push(item);
+        populate(items, itemsList);
+        localStorage.setItem('items', JSON.stringify(items));
+        this.reset();
+    }
+    
+    //Populate dish list
+    function populate(plates = [], plateList){
+        plateList.innerHTML = plates.map((plate, i) => {
+            return `<li><input type="checkbox" id = "${i}" ${plate.done ? "checked":""}>
+                        <label for = "${i}">${plate.name}<label></li>`
+        }).join('');
+    }
+    
+    //Update localStorage when plate is toggled
+    function updateStorage(e){
+        if(e.target.nodeName != 'INPUT') return;
+        const id = e.target.id;
+        items[id].done = !items[id].done;
+        localStorage.setItem('items', JSON.stringify(items));    
+    }
+    
+    //EVENTS
+    addItems.addEventListener('submit', addItem);
+    itemsList.addEventListener('click', updateStorage);
+    populate(items, itemsList);
+    
+    
 
 </script>
 

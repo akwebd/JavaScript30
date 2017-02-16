@@ -31,6 +31,21 @@
   </style>
 
 <script>
+//    VARIABLES
+    const heroText = document.querySelector('.hero h1');
+//    FUNCIONTS
+    function updateShadow(e){
+        const center = {x: heroText.offsetLeft + heroText.offsetWidth / 2,
+                       y: heroText.offsetTop + heroText.offsetHeight / 2};
+        const offset = {x: -e.clientX+ center.x,
+                       y: -e.clientY + center.y};
+        heroText.style.textShadow = `${offset.x}px ${offset.y}px 1px #ff0000,
+                                     ${-offset.x}px ${offset.y}px 1px #00ff00, 
+                                     ${offset.y}px ${offset.x}px 1px #0000ff,
+                                     ${-offset.y}px ${offset.x}px 1px #ffff00`;
+    }
+//    EVENTS
+    window.addEventListener('mousemove', updateShadow);
 </script>
 </body>
 </html>
