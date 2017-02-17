@@ -182,6 +182,19 @@
     </li>
   </ul>
 <script>
+    const videos=Array.from(document.querySelectorAll('li'));
+    //solution without map
+//    const totSec=videos.reduce((total, video)=>{
+//        const extract = video.dataset.time.split(":");        
+//        return total + parseInt(extract[0])*60 + parseInt(extract[1]);        
+//    }, 0);
+    //solution with map
+    const totSec = videos
+    .map(video => {return video.dataset.time;})
+    .map(time => {const [min, sec] = time.split(":").map(parseFloat);
+                  return min*60+sec;})
+    .reduce((tot, sec)=>{return tot+sec;}, 0);
+    console.log(`${Math.floor(totSec/3600)} ${Math.floor(totSec/60)%60} ${totSec%60%60}`);
 </script>
 </body>
 </html>
