@@ -43,8 +43,23 @@
   <ul id="bands"></ul>
 
 <script>
-const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+    //VARIABLES
+    const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+    const articles = ['The', 'A', 'An'];
+    const bandList = document.querySelector('#bands');
+    
 
+    function getWord(text){
+        const words = text.split(" ");
+        return articles.includes(words[0])?words[1]:words[0];
+    }
+    
+    bandList.innerHTML = bands.sort(function(a, b){
+        return getWord(a) == getWord(b)?0:(getWord(a)>getWord(b))||-1;}).reduce((htmlCode, band)=>{   
+        const listItem = `<li>${band}</li>`;
+        return htmlCode + listItem;
+    }, "");
+    
 
 </script>
 
