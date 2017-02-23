@@ -206,8 +206,36 @@
   .button[href*=courses] { background: #ffc600; }
 
 </style>
-
 <script>
+    const navBtns = document.querySelectorAll('nav>ul>li');
+    const stripe = document.querySelector('.dropdownBackground');
+    const nav  = document.querySelector('.top');
+    
+    function displayStripe(){     
+            this.classList.add('trigger-enter');
+            setTimeout(() => this.classList.contains('trigger-enter') && this.classList.add('trigger-enter-active'), 50);
+            const popupCoords = this.querySelector('.dropdown').getBoundingClientRect();
+            const navCoords = nav.getBoundingClientRect();
+             const coords = {
+                              height: popupCoords.height,
+                              width: popupCoords.width,
+                              top: popupCoords.top - navCoords.top,//beacause stripe is inside the nav
+                              left: popupCoords.left - navCoords.left//beacause stripe is inside the nav
+                            };
+            stripe.classList.add('open');
+            stripe.style.width = `${coords.width}px`;
+            stripe.style.height = `${coords.height}px`;
+            stripe.style.transform = `translate(${coords.left}px, ${coords.top}px)`;
+        }
+    
+    function hideStripe(){
+        stripe.classList.remove('open');
+        this.classList.remove('trigger-enter', 'trigger-enter-active');     
+        }
+    
+    navBtns.forEach(button => button.addEventListener('mouseenter', displayStripe));
+    navBtns.forEach(button => button.addEventListener('mouseleave', hideStripe));
+    
 </script>
 
 </body>
