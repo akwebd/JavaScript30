@@ -35,6 +35,35 @@
   </div>
 
 <script>
+    "use explicit"
+    const items = document.querySelector('.items');
+    let startX;
+    let startScroll;
+    let scrollX
+    let offsetX
+    
+    function activate(e){
+        items.classList.add('active');
+        startX = e.clientX;
+        startScroll = items.scrollLeft;
+        
+    }
+    function deactivate(){
+        items.classList.remove('active');
+    }
+    function drag(e){
+        if (items.classList.contains('active')){
+            offsetX = startX - e.clientX;
+            console.log(offsetX);
+            items.scrollLeft = startScroll + offsetX;
+        }       
+    }
+    
+    items.addEventListener('mousemove', (e) => drag(e));
+    items.addEventListener('mousedown', (e) => activate(e));
+    items.addEventListener('mouseup', deactivate);
+    items.addEventListener('mouseleave', deactivate);
+    
 </script>
 
   </body>
