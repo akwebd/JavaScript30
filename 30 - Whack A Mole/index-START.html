@@ -33,10 +33,62 @@
   </div>
 
 <script>
-  const holes = document.querySelectorAll('.hole');
-  const scoreBoard = document.querySelector('.score');
-  const moles = document.querySelectorAll('.mole');
+    const holes = document.querySelectorAll('.hole');
+    const scoreBoard = document.querySelector('.score');
+    const moles = document.querySelectorAll('.mole');
+    let previous;
+    let enable = false;
+    let score = 0;
 
+    function randTime(min, max){
+        return Math.random() * (max - min) + min;
+    }
+    
+    function randHole(holes){
+        const nr = Math.floor(Math.random() * holes.length);
+        if (nr == previous || nr == 0){
+            return randHole(holes);
+        }
+        previous = holes[nr];
+        return previous;        
+    }
+
+    function showMole(){
+        const timer = randTime(300, 1500);
+        const hole = randHole(holes);
+        hole.classList.add('up');
+        setTimeout(()=>{
+            hole.classList.remove('up');
+            if(enable) {
+                showMole();
+            }
+        }, timer);
+    }
+    
+    function startGame(){
+        score = 0;
+        scoreBoard.textContent = score;
+        enable = true;
+        showMole();
+        setTimeout(()=> {
+            enable = false;
+            scoreBoard.textContent = `${score} Game Over`;
+        }, 10000);        
+    }
+    
+    function updateScore(e){
+        score++;
+        scoreBoard.textContent = score;
+        console.log(this.classList);
+        this.parentElement.classList.remove('up');
+    }
+    
+    moles.forEach(mole => mole.addEventListener('click', updateScore));
+    
+    
+    
+    
+    
 </script>
 </body>
 </html>
